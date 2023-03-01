@@ -24,78 +24,42 @@ const PerformancePages: any = {
     url: 'novosClientes',
     title: 'Novas Vendas',
     CODVEND: '',
-    metrics: {
-      goal: '10',
-      realized: '0 qtd',
-      percentage: '0',
-      wheight: '10',
-      result: '0',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
   salesMix: {
     url: 'mixVendas',
     title: 'Mix de Vendas',
     CODVEND: '',
-    metrics: {
-      goal: '30 sku',
-      realized: '50 sku',
-      percentage: '100',
-      wheight: '10',
-      result: '20',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
   discount: {
     url: 'desconto',
     title: 'Desconto',
     CODVEND: '',
-    metrics: {
-      goal: '10%',
-      realized: '0%',
-      percentage: '0',
-      wheight: '10',
-      result: '0',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
   positivity: {
     url: 'positivacao',
     title: 'Positivação',
     CODVEND: '',
-    metrics: {
-      goal: '90%',
-      realized: '98%',
-      percentage: '100',
-      wheight: '10',
-      result: '8',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
   bonus: {
     url: 'bonificacao',
     title: 'Bonificação',
     CODVEND: '',
-    metrics: {
-      goal: 'R$ 100,00',
-      realized: 'R$ 40,00',
-      percentage: '40',
-      wheight: '10',
-      result: '6',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
   profitability: {
     url: 'rentabilidade',
     title: 'Rentabilidade',
     CODVEND: '',
-    metrics: {
-      goal: '15%',
-      realized: '10%',
-      percentage: '66',
-      wheight: '5',
-      result: '3',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
   monthlySalesTarget: {
@@ -103,26 +67,14 @@ const PerformancePages: any = {
     title: 'Meta de Vendas',
     CODVEND: '',
     schema: 'MonthlySalesTarget',
-    metrics: {
-      goal: 'R$ 110.000',
-      realized: 'R$ 33.000',
-      percentage: '30',
-      wheight: '10',
-      result: '3',
-    }
+    metrics:initialStateMetrics,
   },
   averageTicket: {
     url: 'ticket',
     schema: 'AverageTicket',
     title: 'Ticket Médio',
     CODVEND: '',
-    metrics: {
-      goal: 'R$ 1.000',
-      realized: 'R$ 1.000',
-      percentage: '100',
-      wheight: '10',
-      result: '10',
-    },
+    metrics:initialStateMetrics,
     data: [],
   },
 };
@@ -220,10 +172,10 @@ const performanceSlice = createSlice({
         state.nickname = dataHome.APELIDO || '';
         state.performanceResult = dataHome.RESULTADO || '0';
 
-        // const metrics = getMetrics(dataHome);
-        // for (const page in state.performancePages) {
-        //   if (metrics[page]) state.performancePages[page].metrics = metrics[page]
-        // }
+        const metrics = getMetrics(dataHome);
+        for (const page in state.performancePages) {
+          if (metrics[page]) state.performancePages[page].metrics = metrics[page]
+        }
         state.statusHome = 'success';
       })
       .addCase(fetchPerformanceHome.rejected, (state) => {
@@ -254,16 +206,17 @@ const performanceSlice = createSlice({
         state.performancePages[page].status = 'success';
         state.performancePages[page].CODVEND = CODVEND;
 
-        // state.performancePages[page].data = indicadores;
-        state.performancePages[page].data = chartDataMock;
+        state.performancePages[page].data = indicadores;
 
-      //   state.performancePages[page].metrics = {
-      //     goal: meta || '0',
-      //     realized: realizado || '0',
-      //     percentage: resultado || '0',
-      //     wheight: peso || '0',
-      //     result: resultadoPeso || '0',
-      //   }
+        // state.performancePages[page].data = chartDataMock;
+
+        state.performancePages[page].metrics = {
+          goal: meta || '0',
+          realized: realizado || '0',
+          percentage: resultado || '0',
+          wheight: peso || '0',
+          result: resultadoPeso || '0',
+        }
         state.statusPage = 'success';
       })
       .addCase(fetchPerformancePage.rejected, (state) => {

@@ -36,15 +36,15 @@ const Dashboard = () => {
     <Grid container spacing={6}>
       {/** CONTAINER 1 */}
       <Loading visible={status === 'loading'} />
-      <Grid item xs={12} md={8}>
+      <Grid item xs={12} md={12}>
         <Grid container spacing={6}>
-          <Grid item xs={12} md={7}>
+          <Grid item xs={12} md={6}>
             <Progress />
           </Grid>
-          <Grid item xs={12} md={5}>
-            <SalesMonth value='R$ 234 Mil' />
+          <Grid item xs={12} md={6}>
+            <SalesMonth value='R$ 0' />
           </Grid>
-          <ChartSwitch chart='colunaComparativa' size='medium' title='Teste' data={{
+          {/* <ChartSwitch chart='colunaComparativa' size='medium' title='Teste' data={{
             type: 'colunaComparativa',
             name: 'Meta x Realizado',
             data:[
@@ -98,8 +98,8 @@ const Dashboard = () => {
             },
           ],
       }
-      ]}} />
-      <ChartSwitch chart='colunaComparativa' size='medium' title='Teste' data={{
+      ]}} /> */}
+      {/* <ChartSwitch chart='colunaComparativa' size='medium' title='Teste' data={{
       type: 'linha',
       name: 'Total de desconto acumulado',
       subname: 'Meta x Realizado',
@@ -121,16 +121,16 @@ const Dashboard = () => {
           ],
         },
       ],
-    }} />
+    }} /> */}
           <Grid item xs={12}>
             <Table />
           </Grid>
         </Grid>
       </Grid>
       {/** CONTAINER 2 */}
-      <Grid item xs={12} md={4}>
+      {/* <Grid item xs={12} md={4}>
         <Ranking />
-      </Grid>
+      </Grid> */}
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={status === 'loading'}

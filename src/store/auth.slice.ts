@@ -87,44 +87,44 @@ const authSlice = createSlice({
         } else {
           const isManager = action.payload.user.vendedores.length > 1;
 
-          // const sellerCurrent = action.payload.user.vendedores.length > 0 ? action.payload.user.vendedores[0] : null;
+          const sellerCurrent = action.payload.user.vendedores.length > 0 ? action.payload.user.vendedores[0] : null;
           state.credentials = action.payload.credentials;
           state.user = action.payload.user;
           state.loginFetchStatus = 'success';
 
-          // state.isManager = isManager;
-          // state.sellers = action.payload.user.vendedores;
-          // state.CODVEND = isManager ? sellerCurrent!.CODVEND : '';
-          // state.sellerCurrent = isManager ? sellerCurrent : null;
-          // isManager && AuthService.saveSellerCurrent(sellerCurrent!);
+          state.isManager = isManager;
+          state.sellers = action.payload.user.vendedores;
+          state.CODVEND = isManager ? sellerCurrent!.CODVEND : '';
+          state.sellerCurrent = isManager ? sellerCurrent : null;
+          isManager && AuthService.saveSellerCurrent(sellerCurrent!);
 
-          state.isManager = true;
-          state.sellers =[
-            {
-              CODVEND: '000',
-              APELIDO: 'GUSTAVO',
-            },
+        //   state.isManager = true;
+        //   state.sellers =[
+        //     {
+        //       CODVEND: '000',
+        //       APELIDO: 'GUSTAVO',
+        //     },
         
-            {
-              CODVEND: '001',
-              APELIDO: 'FERNANDO',
-            },
+        //     {
+        //       CODVEND: '001',
+        //       APELIDO: 'FERNANDO',
+        //     },
         
-            {
-              CODVEND: '002',
-              APELIDO: 'JOSE',
-            },
+        //     {
+        //       CODVEND: '002',
+        //       APELIDO: 'JOSE',
+        //     },
         
-            {
-              CODVEND: '003',
-              APELIDO: 'MARIA',
-            },
-          ]
-           state.CODVEND = isManager ? '000' : '';
-          state.sellerCurrent = {
-            CODVEND: '000',
-            APELIDO: 'GUSTAVO',
-          }
+        //     {
+        //       CODVEND: '003',
+        //       APELIDO: 'MARIA',
+        //     },
+        //   ]
+        //    state.CODVEND = isManager ? '000' : '';
+        //   state.sellerCurrent = {
+        //     CODVEND: '000',
+        //     APELIDO: 'GUSTAVO',
+        //   }
 
           
         }
@@ -163,37 +163,37 @@ const authSlice = createSlice({
           state.user = action.payload.user;
           state.loginFetchStatus = 'success';
 
-          // state.isManager = isManager;
-          // state.sellers = action.payload.user.vendedores;
+          state.isManager = isManager;
+          state.sellers = action.payload.user.vendedores;
           
-          // state.CODVEND = AuthService.getSellerCurrent() ? AuthService.getSellerCurrent()!.CODVEND : action.payload.user.codvend;
-          // state.sellerCurrent = AuthService.getSellerCurrent()
-
-
-          state.isManager = true;
-          state.sellers =[
-            {
-              CODVEND: '000',
-              APELIDO: 'GUSTAVO',
-            },
-        
-            {
-              CODVEND: '001',
-              APELIDO: 'FERNANDO',
-            },
-        
-            {
-              CODVEND: '002',
-              APELIDO: 'JOSE',
-            },
-        
-            {
-              CODVEND: '003',
-              APELIDO: 'MARIA',
-            },
-          ]
-           state.CODVEND = AuthService.getSellerCurrent() ? AuthService.getSellerCurrent()!.CODVEND : '000';
+          state.CODVEND = AuthService.getSellerCurrent() ? AuthService.getSellerCurrent()!.CODVEND : action.payload.user.codvend;
           state.sellerCurrent = AuthService.getSellerCurrent()
+
+
+        //   state.isManager = true;
+        //   state.sellers =[
+        //     {
+        //       CODVEND: '000',
+        //       APELIDO: 'GUSTAVO',
+        //     },
+        
+        //     {
+        //       CODVEND: '001',
+        //       APELIDO: 'FERNANDO',
+        //     },
+        
+        //     {
+        //       CODVEND: '002',
+        //       APELIDO: 'JOSE',
+        //     },
+        
+        //     {
+        //       CODVEND: '003',
+        //       APELIDO: 'MARIA',
+        //     },
+        //   ]
+        //    state.CODVEND = AuthService.getSellerCurrent() ? AuthService.getSellerCurrent()!.CODVEND : '000';
+        //   state.sellerCurrent = AuthService.getSellerCurrent()
 
           
         }
