@@ -1,0 +1,110 @@
+import { ApexOptions } from 'apexcharts';
+import React from 'react';
+import dynamic from 'next/dynamic'
+
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
+
+interface AreaChartProps {
+  data: any;
+}
+
+const AreaChart:React.FC<AreaChartProps> = ({data}) => {
+  const chartOptions: ApexOptions = {
+    chart: {
+      type: 'area',
+      toolbar: {
+        show: true,
+        tools: {
+          download: true,
+          selection: false,
+          zoom: false,
+          zoomin: true,
+          zoomout: true,
+          pan: false,
+          reset: false,
+        }
+
+      },
+      animations: {
+        enabled: true,
+        easing: 'easeout',
+        speed: 800,
+        animateGradually: {
+          enabled: true,
+          delay: 150,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 350,
+        },
+      },
+    },
+    colors: ['#8e79f658', '#ff926469', '#f6da8b60', '#79f6e169','#ffbe646264', '#8ddcf660', '#F690C3', '#79F6A6', '#FFA864', '#B08DF6', '#F67D93', '#93FF64'],
+    series: 
+      data && data.length > 0 && data.map((item: any) => {
+        return {
+          name: item.title,
+          type: 'area',
+          data: item.data && item.data.length > 0 && item.data.map((item: any) => {
+            return Number(item.value.toString()) || 0;
+          }),
+        };
+      }),
+    xaxis: {
+      categories: data && data.length > 0 && data[0].data && data[0].data.length > 0 && data[0].data.map((item: any) => item.label),
+      axisTicks: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      },
+      crosshairs: {
+        show: false,
+      },
+    },
+    stroke: {
+      curve: 'smooth',
+    },
+    grid: {
+      borderColor: '#EAEAEB',
+      strokeDashArray: 5,
+      xaxis: {
+        lines: {
+          show: true,
+        },
+      },
+
+      yaxis: {
+        lines: {
+          show: false,
+        },
+      },
+    },
+    fill: {
+      type:'solid',
+      opacity: [0.15, 1],
+    },
+
+    legend: {
+      position: 'bottom',
+      horizontalAlign: 'center',
+      floating: false,
+      fontSize: '16px',
+      itemMargin: {
+        horizontal: 15,
+        vertical: 5,
+      },
+      fontFamily: 'Poppins',
+      fontWeight: 400,
+    },
+
+  };
+
+  return (
+    <div>
+      <Chart height={350} options={chartOptions} series={chartOptions.series} type="line" />
+    </div >
+  );
+};
+
+export default AreaChart;
