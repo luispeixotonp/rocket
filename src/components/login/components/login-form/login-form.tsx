@@ -61,6 +61,13 @@ const LoginForm = () => {
     //     message: 'Usuário ou senha inválidos'
     //   })
     // }
+
+    else if (statusLogin === 'error' && false) {
+      setErrorLogin({
+        error: true,
+        message: 'Usuário ou senha inválidos'
+      })
+    }
     dispatch(resetAuthState())
   }
 
