@@ -73,6 +73,7 @@ const App = (props: ExtendedAppProps) => {
             name='description'
             content={`${themeConfig.templateName} – Vidya Code - Uma salestech com soluções 100% embarcadas no EIP Sankhya`}
           />
+          <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
           <meta name='keywords' content='Vidya Code, Performance, Sankhya, EIP, ERP, SaaS, Software as a Service' />
           <meta name='viewport' content='initial-scale=1, width=device-width' />
         </Head>
