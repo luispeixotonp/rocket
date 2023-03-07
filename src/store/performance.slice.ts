@@ -8,7 +8,8 @@ import {
   PerformanceRequest,
   PerformanceResponsePage
 } from "src/types/performance/performance.types";
-import { PerformanceService } from "src/service/performance/performance.service";
+
+// import { PerformanceService } from "src/service/performance/performance.service";
 
 // import { getMetrics } from "src/utils/performance/performance.utils";
 import { PerformanceState } from "./types/performance.types.store";
@@ -159,11 +160,62 @@ export const fetchPerformanceHome = createAsyncThunk(
   'performance/fetchPerformanceHome',
   async (params: PerformanceRequest) => {
     try {
-      const result = await PerformanceService.getHome(
-        params,
-        'Vidya',
-        'f7wynpM',
-      );
+      console.log('params', params);
+
+      // const result = await PerformanceService.getHome(
+      //   params,
+      //   'Vidya',
+      //   'f7wynpM',
+      // );
+      const result = {
+        "performance": [
+          {
+            "CODVEND": "36",
+            "APELIDO": "ANIBAL FURTADO",
+            "META_VENDAS": "R$ 120.000,00",
+            "REALIZADO_VENDAS": "R$ ,00",
+            "PESO_VENDAS": "10",
+            "RESULTADO_VENDAS": "0",
+            "RESULTADO_VENDAS_PESO": "0",
+            "META_MIXVENDAS": "30 sku",
+            "REALIZADO_MIXVENDAS": "0 sku",
+            "PESO_MIXVENDAS": "10",
+            "RESULTADO_MIXVENDAS": "0",
+            "RESULTADO_MIXVENDAS_PESO": "0",
+            "META_RENTABILIDADE": "15 %",
+            "REALIZADO_RENTABILIDADE": "0 %",
+            "PESO_RENTABILIDADE": "10",
+            "RESULTADO_RENTABILIDADE": "0",
+            "RESULTADO_RENTABILIDADE_PESO": "0",
+            "META_TICKETMEDIO": "R$ 1.500,00",
+            "REALIZADO_TICKETMEDIO": "R$ ",
+            "PESO_TICKETMEDIO": "5",
+            "RESULTADO_TICKETMEDIO": "0",
+            "RESULTADO_TICKETMEDIO_PESO": "0",
+            "META_POSITIVACAO": "90 %",
+            "REALIZADO_POSITIVACAO": "0 %",
+            "PESO_POSITIVACAO": "10",
+            "RESULTADO_POSITIVACAO": "0",
+            "RESULTADO_POSITIVACAO_PESO": "0",
+            "META_NOVOSCLIENTES": "10 qtd",
+            "REALIZADO_NOVOSCLIENTES": "0 qtd",
+            "PESO_NOVOS_CLIENTES": "10",
+            "RESULTADO_VENDAS_NOVOS_CLIENTES": "0",
+            "resultado_vendas_novos_clientes_peso": "0",
+            "META_DESCONTO": "10 %",
+            "REALIZADO_DESCONTO": "0 %",
+            "PESO_DESCONTO": "5",
+            "RESULTADO_DESCONTO": "0",
+            "RESULTADO_DESCONTO_PESO": "0",
+            "META_BONIFICACAO": "R$ 100,00",
+            "REALIZADO_BONIFICACAO": "R$ ,00",
+            "PESO_BONIFICACAO": "5",
+            "RESULTADO_BONIFICACAO": "100",
+            "RESULTADO_BONIFICACAO_PESO": "20",
+            "RESULTADO": "30.76923076923076923076923076923076923077"
+          }
+        ]
+      } as PerformanceResponseHome;
       if (result === null) return null;
 
       return result;
@@ -184,17 +236,66 @@ export const fetchPerformancePage = createAsyncThunk(
 
     let data: PerformanceResponsePage
     try {
-      const result = await PerformanceService.getPage(
-        PerformancePages[page].url,
-        'vidya',
-        'f7wynpM',
+      // const result = await PerformanceService.getPage(
+      //   PerformancePages[page].url,
+      //   'vidya',
+      //   'f7wynpM',
 
-        // URLERP ?? '',
-        // CODVEND ?? '',
-        'http://acaifruit.fmcdatacom.com.br:8648',
-        '36',
+      //   // URLERP ?? '',
+      //   // CODVEND ?? '',
+      //   'http://acaifruit.fmcdatacom.com.br:8648',
+      //   '36',
 
-      );
+      // );
+      const result = {
+        "meta": "15 %",
+        "realizado": "0 %",
+        "peso": "10",
+        "resultado": "0",
+        "resultadoPeso": "0",
+        "indicadores": [
+          {
+            "name": "TOP 5 - Vendas de maior rentabilidade",
+            "type": "table",
+            "fields": [
+              {
+                "label": "Pedido"
+              },
+              {
+                "label": "Parceiro"
+              },
+              {
+                "label": "Valor"
+              },
+              {
+                "label": "Rentabilidade"
+              },
+              {}
+            ],
+            "data": []
+          },
+          {
+            "name": "TOP 5 - Vendas de menor rentabilidade",
+            "type": "table",
+            "fields": [
+              {
+                "label": "Pedido"
+              },
+              {
+                "label": "Parceiro"
+              },
+              {
+                "label": "Valor"
+              },
+              {
+                "label": "Rentabilidade"
+              },
+              {}
+            ],
+            "data": []
+          }
+        ]
+      } as PerformanceResponsePage;
       if (result === null) return null;
       data = result;
 

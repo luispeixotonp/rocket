@@ -53,12 +53,14 @@ const LoginForm = () => {
   const redirect = () => {
     if (statusLogin === 'success' && user) {
       router.push('/')
-    } else if (statusLogin === 'error') {
-      setErrorLogin({
-        error: true,
-        message: 'Usuário ou senha inválidos'
-      })
-    }
+    } 
+
+    // else if (statusLogin === 'error') {
+    //   setErrorLogin({
+    //     error: true,
+    //     message: 'Usuário ou senha inválidos'
+    //   })
+    // }
     dispatch(resetAuthState())
   }
 

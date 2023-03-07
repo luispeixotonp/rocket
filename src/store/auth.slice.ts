@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AuthService } from "src/service/auth/auth.service";
+import { User } from "src/types/user/user.types";
 import { RootState } from "./store";
 import { AuthState, Credentials } from "./types/auth.type";
 
@@ -28,10 +29,32 @@ export const login = createAsyncThunk(
     const { currentServer } = (getState() as RootState).servers;
     if (currentServer == null) return null;
 
-    const user = await AuthService.signIn(
-      credentials,
-      currentServer?.ipServer,
-    );
+    // const user = await AuthService.signIn(
+    //   credentials,
+    //   currentServer?.ipServer,
+    // );
+
+    const user = {
+      codvend: "60",
+      codemp: "1",
+      codusu: "855",
+      nomeusu: "vidya",
+      NOMEUSU: "vidya",
+      CODUSU: "855",
+      CODVEND: "60",
+      CODEMP: "1",
+      erro: "OK",
+      ACESSOVISUALCAB: "T",
+      SEQVISITA: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      CODCENCUS: "0",
+      CODREG: "10000",
+      vendedores: [
+        {
+          "CODVEND": "60",
+          "APELIDO": "MARQUENES -GO"
+        }
+      ]
+    } as User;
 
     if (user) {
       return {
@@ -158,7 +181,7 @@ const authSlice = createSlice({
         if (!action.payload || action.payload == null) {
           state.loginFetchStatus = 'error';
         } else {
-          const isManager = action.payload.user.vendedores.length > 1;
+          // const isManager = action.payload.user.vendedores.length > 1;
           state.credentials = action.payload.credentials;
           state.user = action.payload.user;
           state.loginFetchStatus = 'success';
