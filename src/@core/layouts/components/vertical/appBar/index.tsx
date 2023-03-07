@@ -52,9 +52,9 @@ const LayoutAppBar = (props: Props) => {
   const { contentWidth } = settings
 
   return (
-    <AppBar elevation={0} color='default' className='layout-navbar' position='static' style={
+    <AppBar elevation={0} color='default' className='layout-navbar' position='fixed' style={
       {
-        backgroundColor: '#fff',
+        backgroundColor: '#F2F4F9',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         border: 'none',

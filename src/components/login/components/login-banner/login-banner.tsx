@@ -2,7 +2,7 @@ import React from "react";
 import { Logo } from "src/components/logo/logo";
 import { Container } from "./styles";
 
-export const LoginBanner = () => {
+const LoginBanner = () => {
 
   return (
     <Container>
@@ -10,3 +10,5 @@ export const LoginBanner = () => {
     </Container>
   );
 };
+
+export default LoginBanner;

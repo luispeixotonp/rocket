@@ -4,6 +4,9 @@ import MuiSwipeableDrawer, { SwipeableDrawerProps } from '@mui/material/Swipeabl
 
 // ** Type Import
 import { Settings } from 'src/@core/context/settingsContext'
+import { useDispatch, useSelector } from 'react-redux'
+import { setShowMenu } from 'src/store/menu.slice'
+import { RootState } from 'src/store/store'
 
 interface Props {
   hidden: boolean
@@ -35,11 +38,16 @@ const SwipeableDrawer = styled(MuiSwipeableDrawer)<SwipeableDrawerProps>({
 
 const Drawer = (props: Props) => {
   const { hidden, children, navWidth, navVisible, setNavVisible } = props
+  const showMenu = useSelector((state: RootState) => state.menu.showMenu)
+  const dispatch = useDispatch<any>()
 
   const MobileDrawerProps = {
     open: navVisible,
     onOpen: () => setNavVisible(true),
-    onClose: () => setNavVisible(false),
+    onClose: () => {
+      handleDrawerClose()
+      setNavVisible(false)
+    },
     ModalProps: {
       keepMounted: true // Better open performance on mobile.
     }
@@ -48,14 +56,45 @@ const Drawer = (props: Props) => {
   const DesktopDrawerProps = {
     open: true,
     onOpen: () => null,
-    onClose: () => null
+    onClose: () => {
+      handleDrawerClose()
+      setNavVisible(false)
+    }
+  }
+
+  const getVisibleDrawer = () => {
+    if (showMenu) {
+      return 'temporary'
+    }
+
+    if (!hidden) {
+      return 'permanent'
+    } else {
+      return 'temporary'
+    }
+  }
+
+  const getProps = () => {
+    if (showMenu) {
+      return DesktopDrawerProps
+    }
+
+    if (!hidden) {
+      return DesktopDrawerProps
+    } else {
+      return MobileDrawerProps
+    }
+  }
+
+  const handleDrawerClose = () => {
+    dispatch(setShowMenu(false))
   }
 
   return (
     <SwipeableDrawer
       className='layout-vertical-nav'
-      variant={hidden ? 'temporary' : 'permanent'}
-      {...(hidden ? { ...MobileDrawerProps } : { ...DesktopDrawerProps })}
+      variant={getVisibleDrawer()}
+      {...({...getProps()})}
       PaperProps={{ sx: { width: navWidth, marginTop: '125px' } }}
       sx={{
         width: navWidth,

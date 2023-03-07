@@ -21,7 +21,10 @@ export const Row = styled(TableRow).attrs({
 
 `;
 
-export const Body = styled(TableBody)``;
+export const Body = styled(TableBody)`
+  max-height: 300px;
+  overflow-y: scroll;
+`;
 export const ColumnName = styled(TableCell).attrs({
   component: 'th',
   style: {

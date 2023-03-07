@@ -50,9 +50,7 @@ export const CompareCard = styled.div`
 
 
 export const Title = styled.text.attrs({
-    sx: {
-        color: '#184485',
-    }
+    color: '#184485',
 })`
     font-size: 1.5rem;
     font-family: 'Poppins', sans-serif;
@@ -61,7 +59,7 @@ export const Title = styled.text.attrs({
 `;
 
 export const Subtitle = styled.text`
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-family: 'Poppins', sans-serif;
     color: '#444444';
     font-weight: 400;

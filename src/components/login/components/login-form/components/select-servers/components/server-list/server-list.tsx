@@ -1,11 +1,11 @@
-import { Avatar, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
-import { Cloud, Plus } from 'mdi-material-ui'
+import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemButton, ListItemText } from "@mui/material";
+import { Plus, TrashCan } from 'mdi-material-ui'
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Modal } from "src/components/modal/modal";
 import { RootState } from "src/store/store";
 import { SelectMethod } from "../new-server/select-method/select-method";
-import { setCurrentServer } from "src/store/server.slice";
+import { setCurrentServer, setServerListModal, deleteServer } from "src/store/server.slice";
 import { Server } from "src/types/server/server.type";
 
 
@@ -17,32 +17,39 @@ interface ServerListProps {
 export const ServerList: React.FC<ServerListProps> = (props) => {
   const [visibleMethod, setVisibleMethod] = React.useState(false)
   const servers = useSelector((state: RootState) => state.servers.servers)
+  const visibleModal = useSelector((state: RootState) => state.servers.serverListModal)
 
   const dispatch = useDispatch<any>();
 
 
   const handleNewServer = () => {
-    props.setVisible(false)
+    hadnleCloseModal()
     setVisibleMethod(true)
   }
 
+  const hadnleCloseModal = () => {
+    props.setVisible(false)
+    dispatch(setServerListModal(false))
+  }
 
   const selectCurrentServer = (server: Server) => {
     dispatch(setCurrentServer(server))
   }
 
+  const removeServer = (id: string) => {
+    dispatch(deleteServer(id))
+  }
+
   const renderList = () =>
     servers.map((item, index) => (
       <ListItem key={index} disableGutters >
+        <IconButton onClick={() => removeServer(item.id)}>
+          <TrashCan sx={{ color: '#909090' }} />
+        </IconButton>
         <ListItemButton onClick={() => {
-          props.setVisible(false)
+          hadnleCloseModal()
           selectCurrentServer(item)
         }} key={index}>
-          <ListItemAvatar>
-            <Avatar>
-              <Cloud />
-            </Avatar>
-          </ListItemAvatar>
           <ListItemText
             primary={item.name}
             secondary={item.ipServer}
@@ -71,8 +78,8 @@ export const ServerList: React.FC<ServerListProps> = (props) => {
     <>
       <Modal
         title="Servidores"
-        visible={props.visible}
-        setVisible={props.setVisible}
+        visible={props.visible || visibleModal}
+        setVisible={hadnleCloseModal}
       >
         <List sx={{
           pt: 0,

@@ -11,6 +11,7 @@ export interface ModalProps {
   setVisible: React.Dispatch<React.SetStateAction<boolean>>
   title?: string;
   disableButtonClose?: boolean;
+  cancelText?: string;
   button?: {
     text: string;
     onClick: () => void;
@@ -31,7 +32,7 @@ export const Modal: React.FC<ModalProps> = (props) => {
         {props.children}
       </DialogContent>
       <DialogActions>
-        {!props.disableButtonClose && <Button color='error' onClick={handleCloseForm}>Cancelar</Button>}
+        {!props.disableButtonClose && <Button color='error' onClick={handleCloseForm}>{props.cancelText || 'Cancelar'}</Button>}
         {props.button && <Button onClick={props.button.onClick}>{props.button.text}</Button>}
       </DialogActions>
     </Dialog>

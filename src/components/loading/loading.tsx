@@ -1,6 +1,6 @@
 import React from 'react';
 import Lottie from 'react-lottie';
-import { CircularProgress, Container, Subtitle, Title } from './styles';
+import { Container, Subtitle, Title } from './styles';
 
 interface LoadingProps {
   visible: boolean;
@@ -15,7 +15,7 @@ return (
     <Container>
       <Lottie
         options={{
-          loop: false,
+          loop: true,
           autoplay: true,
           animationData: require('../../../public/images/misc/loading.json'),
           rendererSettings: {

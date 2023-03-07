@@ -7,6 +7,7 @@ const initialState: ServerState = {
   servers: [],
   currentServer: null,
   status: 'idle',
+  serverListModal: false,
 }
 
 export const addServer = createAsyncThunk(
@@ -81,6 +82,9 @@ const serverSlice = createSlice({
   reducers: {
     resetStatus: (state) => {
       state.status = 'idle';
+    },
+    setServerListModal: (state, action) => {
+      state.serverListModal = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -140,5 +144,5 @@ const serverSlice = createSlice({
   }
 });
 
-export const { resetStatus } = serverSlice.actions;
+export const { resetStatus, setServerListModal } = serverSlice.actions;
 export default serverSlice.reducer;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Bullseye, Close } from "mdi-material-ui";
 import React from "react";
 import { Card, CompareCard, Container, Content, IconContent, Subtitle, Title } from "./styles";
@@ -11,7 +12,7 @@ const ComparativeChart: React.FC<ComparativeChartProps> = ({ data }) => {
     const renderCard = (label:string, value:string) => (
         <Card>
         <Content>
-            <Title>{value}</Title>
+            <Title style={{color:'#184485'}}>{value}</Title>
             <Subtitle>{label}</Subtitle>
         </Content>
         <IconContent>

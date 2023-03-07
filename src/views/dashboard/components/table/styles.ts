@@ -1,4 +1,6 @@
-import { TableBody, TableCell, TableRow } from '@mui/material';
+import { TableBody, TableRow } from '@mui/material';
+import TableCellMaterial from '@mui/material/TableCell'
+
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -28,7 +30,19 @@ export const Row = styled(TableRow).attrs({
     cursor: pointer;
     opacity: 0.8;
   }
+`;
 
+export const TableCell = styled(TableCellMaterial).attrs({
+  sx: {
+    color: '#000',
+    fontSize: '1rem',
+  },
+})`
+  font-size: 1rem !important;
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+  font-weight: 600;
+  text-transform: capitalize;
 `;
 
 export const Body = styled(TableBody)`
@@ -38,8 +52,9 @@ export const Body = styled(TableBody)`
 
 export const Cell = styled(TableCell).attrs({
   sx: {
-    margin: '10px',}
-    
+    margin: '10px',
+  }
+
 })`
     border: none;
     font-size: 1rem !important;

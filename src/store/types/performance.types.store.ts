@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Metrics } from "src/types/metrics";
 import { EntityState, FetchStatus } from ".";
 import { ChartData } from "./chart.types";
@@ -16,8 +17,8 @@ export interface Performance extends EntityState<Metrics> {
 
 export interface PerformanceState extends Performance {
   status: FetchStatus;
-  error: boolean;
   nickname: string;
+  error: boolean;
   performanceResult: string;
   engagementResult: string;
   performancePages: any;

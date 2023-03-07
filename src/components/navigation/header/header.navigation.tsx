@@ -1,24 +1,22 @@
 import { useSelector } from 'react-redux';
 import { RootState } from 'src/store/store';
-import { AcronymText, Avatar, CompanyText, Container, Divider, NameText } from './styles'
+import { Avatar, CompanyText, Container, Divider, NameText } from './styles'
+import * as Icon from 'mdi-material-ui'
 
 const HeaderNavigation = () => {
   const name = useSelector((state: RootState) => state.auth.user?.NOMEUSU);
-  const isManager = useSelector((state: RootState) => state.auth.isManager);
-  const acronym = name ? name[0] : ''
-
-  return (
+  const sellerSelected = useSelector((state: RootState) => state.auth.sellerCurrent);
+  
+return (
     <Container>
       <Avatar>
-        <AcronymText>
-          {acronym}
-        </AcronymText>
+        <Icon.Account sx={{fontSize: '64px'}} />
       </Avatar>
       <CompanyText>
-        {isManager ? 'Gerente' : 'Vendedor'}
+        Vendedor
       </CompanyText>
       <NameText>
-        {name}
+        {sellerSelected ? (sellerSelected.CODVEND + ' - ' + sellerSelected.APELIDO) : name}
       </NameText>
       <Divider />
     </Container>

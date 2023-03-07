@@ -75,11 +75,13 @@ const VerticalLayout = (props: LayoutProps) => {
           {...props}
         />
 
-        <MainContentWrapper className='layout-content-wrapper' >
+        <MainContentWrapper className='layout-content-wrapper' sx={
+          {
+            marginTop: '105px',
+          }
+        }>
           <ContentWrapper
             className='layout-page-content'
-
-            // CONTEUDO
             sx={{
               ...(contentWidth === 'boxed' && {
                 mx: 'auto',

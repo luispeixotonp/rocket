@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+const Container = styled.div`
   display: grid;
   grid-template-columns: 1.8fr 3fr;
   align-items: center;
@@ -16,3 +16,5 @@ export const Container = styled.div`
     width: 100vw;
   }
 `;
+
+export default Container;

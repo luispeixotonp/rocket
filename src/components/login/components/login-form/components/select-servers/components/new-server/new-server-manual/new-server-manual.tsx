@@ -1,10 +1,11 @@
-import { Button, TextField } from "@mui/material";
-import React, { useRef } from "react";
+import { TextField } from "@mui/material";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Modal } from "src/components/modal/modal";
 import { addServer } from "src/store/server.slice";
 import { Server } from "src/types/server/server.type";
 import { Validate } from "src/utils/validate/validate.utis";
+import RegisterSuccess from "../../register-success/register-success";
 import { Container } from "./styles";
 
 interface NewServerManualProps {
@@ -18,8 +19,7 @@ const NewServerManual: React.FC<NewServerManualProps> = (props) => {
   const [serverName, setServerName] = React.useState('');
   const [ipServer, setIpServer] = React.useState('');
   const [ipImage, setIpImage] = React.useState('');
-
-
+  const [visibleSuccess, setVisibleSuccess] = React.useState(false);
 
   const [errorName, setErrorName] = React.useState({
     error: false,
@@ -116,6 +116,7 @@ const NewServerManual: React.FC<NewServerManualProps> = (props) => {
     setIpServer('');
     setIpImage('');
     handleClose();
+    setVisibleSuccess(true);
   }
 
   const handleClose = () => {
@@ -123,6 +124,7 @@ const NewServerManual: React.FC<NewServerManualProps> = (props) => {
   }
 
   return (
+    <>
     <Modal
       visible={props.visible}
       setVisible={handleClose}
@@ -169,6 +171,8 @@ const NewServerManual: React.FC<NewServerManualProps> = (props) => {
 
       </Container>
     </Modal>
+    <RegisterSuccess visible={visibleSuccess} setVisible={setVisibleSuccess} />
+    </>
   )
 }
 

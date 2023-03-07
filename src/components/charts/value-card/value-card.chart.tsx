@@ -1,6 +1,6 @@
-import {  Close, Ticket } from "mdi-material-ui";
+import {  Ticket } from "mdi-material-ui";
 import React from "react";
-import { Card, CompareCard, Container, Content, IconContent, Subtitle, Title } from "./styles";
+import { Card, Container, Content, IconContent, Subtitle, Title } from "./styles";
 
 interface ValueCardChartProps {
     data: any;

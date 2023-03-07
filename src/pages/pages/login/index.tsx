@@ -1,17 +1,21 @@
 // ** React Imports
 import { ReactNode } from 'react'
 import BlankLayout from 'src/@core/layouts/BlankLayout'
-import { Container } from './styles'
-import LoginForm from './components/login-form/login-form'
-import { LoginBanner } from './components/login-banner/login-banner'
+import LoginForm from '../../../components/login/components/login-form/login-form'
+import LoadingLogin from '../../../components/login/components/loading/loading.login'
+import LoginBanner from '../../../components/login/components/login-banner/login-banner'
+import Container from './styles'
 
 const LoginPage = () => {
 
   return (
-    <Container>
-      <LoginBanner />
-      <LoginForm />
-    </Container>
+    <>
+      <Container>
+        <LoginBanner />
+        <LoginForm />
+      </Container>
+      <LoadingLogin />
+    </>
   )
 }
 

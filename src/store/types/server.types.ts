@@ -5,4 +5,5 @@ export interface ServerState {
   servers: Server[];
   currentServer: Server | null;
   status: FetchStatus;
+  serverListModal: boolean;
 }

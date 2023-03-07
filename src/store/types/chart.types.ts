@@ -1,5 +1,5 @@
 import { Metrics } from "src/types/metrics";
-import { PerformanceChartData } from "src/types/performance.types";
+import { PerformanceChartData } from "src/types/performance/performance.types";
 
 export interface ChartData {
   status: string;

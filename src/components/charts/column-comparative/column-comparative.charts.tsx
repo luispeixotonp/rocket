@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useTheme } from "@mui/material";
 import { ApexOptions } from "apexcharts";
 import React from "react";
@@ -9,21 +10,6 @@ interface ColumnComparativeChartProps {
 
 const ColumnComparativeChart: React.FC<ColumnComparativeChartProps> = ({ data }) => {
   const theme = useTheme()
-
-  const getColor = (value: number) => {
-    const maxValue = data.reduce((prev: any, current: any) => (prev.value > current.value) ? prev : current)
-    const minValue = data.reduce((prev: any, current: any) => (prev.value < current.value) ? prev : current)
-
-    if (value === maxValue.value) {
-      return '#2B8B09'
-    }
-
-    if (value === minValue.value) {
-      return '#D62828'
-    }
-
-    return '#EBA83A'
-  }
 
   const options: ApexOptions = {
     chart: {
@@ -46,29 +32,6 @@ const ColumnComparativeChart: React.FC<ColumnComparativeChartProps> = ({ data })
         horizontal: false,
         borderRadius: 20,
         distributed: false,
-
-        // colors: {
-        //   ranges:
-        //     data ? data.map((item: any, index: number) => {
-        //       if (index === data.length - 1){
-        //         return {
-        //           from: (index + 1) * 50,
-        //           to: (index + 1) * 50 + 50,
-        //           color: '#000',
-        //         }
-        //       }
-              
-        //       return {
-        //         from: (index + 1) * 50,
-        //         to: (index + 1) * 50 + 50,
-        //           color: '#004a62',
-        //       }
-        //     }) : []
-              
-
-        // },
-
-        // columnWidth: '80',
         endingShape: 'rounded',
         startingShape: 'rounded'
       }
@@ -82,10 +45,10 @@ const ColumnComparativeChart: React.FC<ColumnComparativeChartProps> = ({ data })
       show: false,
     },
     series: 
-      data ? data.map((item: any, index: number) => {
+      data ? data.map((item: any) => {
         return {
       name: item.label,
-      data:  item.data ? item.data.map((e: any, index: number) => {
+      data:  item.data ? item.data.map((e: any) => {
         return {
           x: e.label,
           y: e.value,
@@ -93,21 +56,6 @@ const ColumnComparativeChart: React.FC<ColumnComparativeChartProps> = ({ data })
       }) : []
       }
     }) : [],
-    
-
-
-    // series:
-    //     data ? data.map((item: any, index: number) => {
-    //     return {
-    //       name: item.label,
-    //       data:[{
-    //         x: item.label,
-    //         y: item.value,
-    //         color: index === data.length - 1 ? getColor(item.value) : '#D6D9DA',
-    //         fillColor: index === data.length - 1 ? getColor(item.value) : '#D6D9DA'
-    //       }]
-    //     }
-    //   }) : [],
     dataLabels: {
       enabled: false,
       style: { fontSize: '16px', fontWeight: 600, fontFamily: 'Poppins', colors: ['#263238'] },

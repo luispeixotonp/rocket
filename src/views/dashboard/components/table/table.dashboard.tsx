@@ -4,87 +4,17 @@ import Card from '@mui/material/Card'
 import Chip from '@mui/material/Chip'
 import Table from '@mui/material/Table'
 import TableHead from '@mui/material/TableHead'
-import TableCell from '@mui/material/TableCell'
 import Typography from '@mui/material/Typography'
 import TableContainer from '@mui/material/TableContainer'
 
 // ** Types Imports
 import { ThemeColor } from 'src/@core/layouts/types'
-import { Body, Cell, Row } from './styles'
-import { Button, TableRow } from '@mui/material'
+import { Body, Cell, Row, TableCell } from './styles'
+import { TableRow } from '@mui/material'
 import { ChevronRight } from 'mdi-material-ui'
 import { useSelector } from 'react-redux'
 import { RootState } from 'src/store/store'
 import { useRouter } from 'next/router'
-
-interface RowType {
-  title: string;
-  goal: string;
-  realized: string;
-  percentage: string;
-  wheight: string;
-  result: string;
-}
-
-
-const rows: RowType[] = [
-  {
-    title: 'Metas de vendas mensal',
-    goal: 'R$ 180.000',
-    realized: 'R$ 249.526',
-    percentage: '100',
-    wheight: '05',
-    result: '236',
-  },
-  {
-    title: 'Mix de vendas',
-    goal: 'R$ 180.000',
-    realized: 'R$ 153.526',
-    percentage: '85',
-    wheight: '08',
-    result: '236',
-  },
-  {
-    title: 'Rentabilidade',
-    goal: 'R$ 180.000',
-    realized: 'R$ 153.526',
-    percentage: '85',
-    wheight: '16',
-    result: '236',
-  },
-  {
-    title: 'Ticket médio',
-    goal: 'R$ 180.000',
-    realized: 'R$ 72.526',
-    percentage: '40',
-    wheight: '14',
-    result: '236',
-  },
-  {
-    title: 'Positivação',
-    goal: 'R$ 180.000',
-    realized: 'R$ 249.526',
-    percentage: '40',
-    wheight: '02',
-    result: '236',
-  },
-  {
-    title: 'Novas Vendas',
-    goal: 'R$ 180.000',
-    realized: 'R$ 62.695',
-    percentage: '40',
-    wheight: '18',
-    result: '236',
-  },
-  {
-    title: 'Desconto',
-    goal: 'R$ 180.000',
-    realized: 'R$ 72.526',
-    percentage: '40',
-    wheight: '14',
-    result: '236',
-  },
-]
 
 const DashboardTable = () => {
   const route = useRouter()
@@ -99,7 +29,7 @@ const DashboardTable = () => {
     });
   }
 
-  const routes = {
+  const routes:any = {
     salesMix: '/performance/mix-vendas',
     profitability: '/performance/rentabilidade',
     newSales: '/performance/novas-vendas',

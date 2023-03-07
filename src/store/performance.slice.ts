@@ -1,15 +1,30 @@
+// @ts-nocheck
+// @ts-ignore
 import { Metrics } from "src/types/metrics";
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import {
-  PerformancePageParams,
+
+  // PerformancePageParams,
   PerformanceRequest,
   PerformanceResponsePage
 } from "src/types/performance/performance.types";
 import { PerformanceService } from "src/service/performance/performance.service";
-import { getMetrics } from "src/utils/performance/performance.utils";
+
+// import { getMetrics } from "src/utils/performance/performance.utils";
 import { PerformanceState } from "./types/performance.types.store";
 import { RootState } from "./store";
-import { chartDataMock } from "src/mock/performance/performance.mock";
+import {
+  averageTicketMock,
+  bonusMock,
+
+  // chartDataMock,
+  discountMock,
+  monthlySalesTargetMock,
+  newSalesMock,
+  positivityMock,
+  profitabilityMock,
+  salesMixMock
+} from "src/mock/performance/performance.mock";
 
 export const initialStateMetrics: Metrics = {
   goal: '0',
@@ -20,18 +35,19 @@ export const initialStateMetrics: Metrics = {
 };
 
 const PerformancePages: any = {
-  newSales: {
-    url: 'novosClientes',
-    title: 'Novas Vendas',
+  monthlySalesTarget: {
+    url: 'metaVendas',
+    title: 'Meta de Vendas',
     CODVEND: '',
+    schema: 'MonthlySalesTarget',
     metrics: {
-      goal: '10',
-      realized: '0 qtd',
-      percentage: '0',
+      goal: 'R$ 110.000',
+      realized: 'R$ 33.000',
+      percentage: '30',
       wheight: '10',
-      result: '0',
+      result: '3',
     },
-    data: [],
+    data: monthlySalesTargetMock,
   },
   salesMix: {
     url: 'mixVendas',
@@ -44,46 +60,7 @@ const PerformancePages: any = {
       wheight: '10',
       result: '20',
     },
-    data: [],
-  },
-  discount: {
-    url: 'desconto',
-    title: 'Desconto',
-    CODVEND: '',
-    metrics: {
-      goal: '10%',
-      realized: '0%',
-      percentage: '0',
-      wheight: '10',
-      result: '0',
-    },
-    data: [],
-  },
-  positivity: {
-    url: 'positivacao',
-    title: 'Positivação',
-    CODVEND: '',
-    metrics: {
-      goal: '90%',
-      realized: '98%',
-      percentage: '100',
-      wheight: '10',
-      result: '8',
-    },
-    data: [],
-  },
-  bonus: {
-    url: 'bonificacao',
-    title: 'Bonificação',
-    CODVEND: '',
-    metrics: {
-      goal: 'R$ 100,00',
-      realized: 'R$ 40,00',
-      percentage: '40',
-      wheight: '10',
-      result: '6',
-    },
-    data: [],
+    data: salesMixMock,
   },
   profitability: {
     url: 'rentabilidade',
@@ -96,20 +73,7 @@ const PerformancePages: any = {
       wheight: '5',
       result: '3',
     },
-    data: [],
-  },
-  monthlySalesTarget: {
-    url: 'metaVendas',
-    title: 'Meta de Vendas',
-    CODVEND: '',
-    schema: 'MonthlySalesTarget',
-    metrics: {
-      goal: 'R$ 110.000',
-      realized: 'R$ 33.000',
-      percentage: '30',
-      wheight: '10',
-      result: '3',
-    }
+    data: profitabilityMock,
   },
   averageTicket: {
     url: 'ticket',
@@ -123,7 +87,59 @@ const PerformancePages: any = {
       wheight: '10',
       result: '10',
     },
-    data: [],
+    data: averageTicketMock,
+  },
+  positivity: {
+    url: 'positivacao',
+    title: 'Positivação',
+    CODVEND: '',
+    metrics: {
+      goal: '90%',
+      realized: '98%',
+      percentage: '100',
+      wheight: '10',
+      result: '8',
+    },
+    data: positivityMock,
+  },
+  newSales: {
+    url: 'novosClientes',
+    title: 'Novas Vendas',
+    CODVEND: '',
+    metrics: {
+      goal: '10',
+      realized: '0 qtd',
+      percentage: '0',
+      wheight: '10',
+      result: '0',
+    },
+    data: newSalesMock,
+  },
+  discount: {
+    url: 'desconto',
+    title: 'Desconto',
+    CODVEND: '',
+    metrics: {
+      goal: '10%',
+      realized: '0%',
+      percentage: '0',
+      wheight: '10',
+      result: '0',
+    },
+    data: discountMock,
+  },
+  bonus: {
+    url: 'bonificacao',
+    title: 'Bonificação',
+    CODVEND: '',
+    metrics: {
+      goal: 'R$ 100,00',
+      realized: 'R$ 40,00',
+      percentage: '40',
+      wheight: '10',
+      result: '6',
+    },
+    data: bonusMock,
   },
 };
 
@@ -163,7 +179,7 @@ export const fetchPerformanceHome = createAsyncThunk(
 export const fetchPerformancePage = createAsyncThunk(
   'performance/fetchPerformancePage',
   async (page: string, { getState }) => {
-    const URLERP = (getState() as RootState).servers.currentServer?.ipImage;
+    // const URLERP = (getState() as RootState).servers.currentServer?.ipImage;
     const CODVEND = (getState() as RootState).auth.CODVEND;
 
     let data: PerformanceResponsePage
@@ -241,29 +257,34 @@ const performanceSlice = createSlice({
           return;
         }
 
-        const { page, data, CODVEND } = action.payload;
+        const { 
+          page, 
+
+          // data, 
+          CODVEND } = action.payload;
         console.log('data', CODVEND, state.performancePages[page].CODVEND, page);
-        const {
-          meta,
-          realizado,
-          peso,
-          resultado,
-          resultadoPeso,
-          indicadores,
-        } = data;
+
+        // const {
+        //   meta,
+        //   realizado,
+        //   peso,
+        //   resultado,
+        //   resultadoPeso,
+        //   indicadores,
+        // } = data;
         state.performancePages[page].status = 'success';
         state.performancePages[page].CODVEND = CODVEND;
 
         // state.performancePages[page].data = indicadores;
-        state.performancePages[page].data = chartDataMock;
+        // state.performancePages[page].data = chartDataMock;
 
-      //   state.performancePages[page].metrics = {
-      //     goal: meta || '0',
-      //     realized: realizado || '0',
-      //     percentage: resultado || '0',
-      //     wheight: peso || '0',
-      //     result: resultadoPeso || '0',
-      //   }
+        //   state.performancePages[page].metrics = {
+        //     goal: meta || '0',
+        //     realized: realizado || '0',
+        //     percentage: resultado || '0',
+        //     wheight: peso || '0',
+        //     result: resultadoPeso || '0',
+        //   }
         state.statusPage = 'success';
       })
       .addCase(fetchPerformancePage.rejected, (state) => {

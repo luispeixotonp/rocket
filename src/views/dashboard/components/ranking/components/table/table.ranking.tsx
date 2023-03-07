@@ -3,7 +3,7 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
-import { Cell } from './styles';
+import { Cell, Text } from './styles';
 
 interface Data {
   position: string;
@@ -39,9 +39,9 @@ export default function TableRanking() {
             .map((row) => {
               return (
                 <TableRow hover key={row.position} sx={{ '&:last-child td, &:last-child th': { border: 0, boxShadow: 'none' } }}>
-                  <Cell>{row.position}º</Cell>
-                  <Cell>{row.name}</Cell>
-                  <Cell>{row.point} pts</Cell>
+                  <Cell><Text color='#184485'>{row.position}º</Text></Cell>
+                  <Cell><Text color='#000000'>{row.name}</Text></Cell>
+                  <Cell><Text color='#444444'>{row.point} pts</Text></Cell>
                 </TableRow>
               );
             })}

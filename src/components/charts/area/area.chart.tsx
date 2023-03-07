@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ApexOptions } from 'apexcharts';
 import React from 'react';
 import dynamic from 'next/dynamic'
@@ -101,9 +102,7 @@ const AreaChart:React.FC<AreaChartProps> = ({data}) => {
   };
 
   return (
-    <div>
       <Chart height={350} options={chartOptions} series={chartOptions.series} type="line" />
-    </div >
   );
 };
 

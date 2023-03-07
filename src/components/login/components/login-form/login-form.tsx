@@ -24,7 +24,7 @@ import { SelectServers } from './components/select-servers/select-servers'
 import { Validate } from 'src/utils/validate/validate.utis'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'src/store/store'
-import { Alert, AlertTitle, Backdrop, CircularProgress } from '@mui/material'
+import { Alert, AlertTitle } from '@mui/material'
 import { login, resetAuthState } from 'src/store/auth.slice'
 
 
@@ -47,10 +47,10 @@ const LoginForm = () => {
 
   useEffect(() => {
     redirect()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusLogin, user])
 
   const redirect = () => {
-    console.log(statusLogin)
     if (statusLogin === 'success' && user) {
       router.push('/')
     } else if (statusLogin === 'error') {
@@ -238,12 +238,6 @@ const LoginForm = () => {
             <SelectServers />
             {renderErrorServer()}
             {renderErrorLogin()}
-            <Backdrop
-              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={statusLogin === 'loading'}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
             <Button
               fullWidth
               size='large'

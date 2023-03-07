@@ -12,7 +12,7 @@ import * as Icon from 'mdi-material-ui'
 
 // ** Third Party Components
 import PerfectScrollbarComponent from 'react-perfect-scrollbar'
-import { MenuContainer, Text, Wrapper } from './styles'
+import { MenuContainer, Wrapper } from './styles'
 import { TextField } from '@mui/material'
 import { Seller } from 'src/types/seller/seller.types'
 import CardSeller from './components/card/card.seller'
@@ -55,14 +55,13 @@ const PerfectScrollbar = styled(PerfectScrollbarComponent)({
 
 
 
-const SellerHeader = () => {
+const SellerSearchSlimHeader = () => {
   // ** States
   const [anchorEl, setAnchorEl] = useState<(EventTarget & Element) | null>(null)
   const [search, setSearch] = useState<string>('')
 
   // ** Hook
   const hidden = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'))
-  const sellerCurrent = useSelector((state: RootState) => state.auth.sellerCurrent)
   const isManager = useSelector((state: RootState) => state.auth.isManager)
   const sellers = useSelector((state: RootState) => state.auth.sellers)
 
@@ -102,11 +101,7 @@ const SellerHeader = () => {
   return (
     <Wrapper hidden={!isManager}>
       <IconButton color='inherit' aria-haspopup='true' onClick={handleDropdownOpen} aria-controls='customized-menu' sx={{ gap: 2 }}>
-        <Icon.Account />
-        <Text variant='h6' sx={{ ml: 1, fontWeight: 600 }}>
-          {sellerCurrent ? sellerCurrent.APELIDO : 'Vendedor'}
-        </Text>
-        <Icon.ChevronDown />
+        <Icon.Magnify />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
@@ -137,6 +132,6 @@ const SellerHeader = () => {
   )
 }
 
-export default SellerHeader
+export default SellerSearchSlimHeader
 
 

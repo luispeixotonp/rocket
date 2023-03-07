@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@mui/material';
+import { CardContent } from '@mui/material';
 import styled from 'styled-components';
 
 interface ContainerProps {

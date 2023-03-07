@@ -1,8 +1,9 @@
+// @ts-nocheck
 import Table from '@mui/material/Table'
-import TableHead from '@mui/material/TableHead'
+import MuiTableHead from '@mui/material/TableHead'
 import TableContainer from '@mui/material/TableContainer'
 import { Body, Cell, Row } from './styles'
-import { TableRow } from '@mui/material'
+import { styled, TableRow } from '@mui/material'
 import { ColumnName } from './styles'
 
 interface TableChartProps {
@@ -14,10 +15,17 @@ const TableChart: React.FC<TableChartProps> = ({ data }) => {
     return index % 2 === 0
   }
 
+  const TableHead = styled(MuiTableHead)`
+     & .MuiTableCell-root {
+    background-color: #fff;
+  }
+  `;
+
+
   return (
-    <TableContainer sx={{ maxHeight: 350 }}>
-      <Table aria-label="simple table" >
-        <TableHead>
+    <TableContainer sx={{ maxHeight: 440 }} style={{ backgroundColor:'#fff' }}>
+      <Table stickyHeader sx={{backgroundColor:'#fff'}} style={{ backgroundColor:'#fff' }}>
+        <TableHead sx={{backgroundColor:'#000'}}>
           <TableRow>
             {
               data.fields.map((field: any, index: number) => (
